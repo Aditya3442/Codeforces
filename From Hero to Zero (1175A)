@@ -1,0 +1,29 @@
+import java.util.Scanner;
+ 
+public class HeroToZero {
+    public static void solve(long n , long k) {
+        long count = 0;
+        while(n != 0) {
+            if(n % k == 0) {
+                n = n / k;
+                count++;
+            }
+            else {
+                long remainder = n % k;
+                n -= remainder;
+                count += remainder;
+            }
+        }
+        System.out.println(count);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        while(size != 0) {
+            long n = sc.nextLong();
+            long k = sc.nextLong();
+            solve(n , k);
+            size--;
+        }
+    }
+}
