@@ -1,0 +1,25 @@
+import java.util.Scanner;
+ 
+public class Stairs {
+    public static void solve(long cells) {
+        long stairs = 1;
+        int count = 0;
+        long i = 1;
+        while(stairs <= cells) {
+            count++;
+            cells = cells - stairs;
+            i = (i * 2) + 1;
+            stairs = i * (i + 1) / 2;
+        }
+        System.out.println(count);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        while(size != 0) {
+            long cells = sc.nextLong();
+            solve(cells);
+            size--;
+        }
+    }
+}
