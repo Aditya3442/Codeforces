@@ -1,0 +1,42 @@
+import java.util.Scanner;
+public class LadyBug {
+    public static String solve(String a , String b) {
+        int n = a.length();
+        int odd0 = 0;
+        int even0 = 0;
+        for(int i = 0; i < n; i++) {
+            if(i % 2 == 0) {
+                if(a.charAt(i) == '0') {
+                    odd0++;
+                }
+                if(b.charAt(i) == '0') {
+                    even0++;
+                }
+            }
+            else {
+                if(a.charAt(i) == '0') {
+                    even0++;
+                }
+                if(b.charAt(i) == '0') {
+                    odd0++;
+                }
+            }
+        }
+        if(n % 2 != 0) {
+            return (odd0 >= ((n / 2) + 1) && even0 >= n / 2) ? "YES" : "NO";
+        }
+        return (odd0 >= n / 2 && even0 >= n / 2) ? "YES" : "NO";
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        while(size != 0) {
+            int n = sc.nextInt();
+            String a = sc.next();
+            String b = sc.next();
+            System.out.println(solve(a , b));
+            size--;
+        }
+
+    }
+}
