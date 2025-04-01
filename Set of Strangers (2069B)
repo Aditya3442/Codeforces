@@ -1,0 +1,54 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class SetOfStrangers {
+    static final int directions[][] = {{-1 , 0} , {0 , 1} , {1 , 0} , {0 , -1}};
+    public static void solve(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+        HashMap<Integer , Integer> map = new HashMap<>();
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                if(map.get(mat[i][j]) == null || map.get(mat[i][j]) != 2) {
+                    map.put(mat[i][j] , 1);
+                    for(int dir[] : directions) {
+                        int x = i + dir[0];
+                        int y = j + dir[1];
+                        if(x >= 0 && x < n && y >= 0 && y < m && mat[x][y] == mat[i][j]) {
+                            map.put(mat[x][y] , 2);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        int count = 0;
+        boolean tag = false;
+        for(Map.Entry<Integer , Integer> entry : map.entrySet()) {
+            if(entry.getValue() == 2)
+                tag = true;
+            count += entry.getValue();
+        }
+        if(tag)
+            System.out.println(count - 2);
+        else
+            System.out.println(count -1);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        while(size != 0) {
+            int n = sc.nextInt();
+            int m = sc.nextInt();
+            int mat[][] = new int[n][m];
+            for(int i = 0; i < n; i++) {
+                for(int j = 0; j < m; j++) {
+                    mat[i][j] = sc.nextInt();
+                }
+            }
+            solve(mat);
+            size--;
+        }
+    }
+}
