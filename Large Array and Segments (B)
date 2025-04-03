@@ -1,0 +1,50 @@
+import java.util.Scanner;
+ 
+public class LargeArrayAndSegments {
+    static int  MOD = Integer.MAX_VALUE;
+    public static void solve(long k , long x , long arr[]) {
+        int n = arr.length;
+        long sum = 0;
+        long count = 0;
+        int index = 0;
+        for(long i = n - 1; i >= 0; i--) {
+            if(sum + arr[(int)i % n] < x) {
+                count++;
+            }
+            sum += arr[(int)i % n] % MOD;
+        }
+        if(sum * k < x) {
+            System.out.println(0);
+            return;
+        }
+        long fix = sum;
+        while(sum + fix < x) {
+            sum += fix;
+            count += n;
+        }
+        for(int i = n - 1; i >= 0; i--) {
+            if(sum + arr[i] < x) {
+                count++;
+                sum += arr[i];
+            }
+            else
+                break;
+        }
+        System.out.println((k * n) - count);
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        while(size != 0) {
+            int n = sc.nextInt();
+            long k = sc.nextLong();
+            long x = sc.nextLong();
+            long arr[] = new long[n];
+            for(int i = 0; i < n; i++) {
+                arr[i] = sc.nextLong();
+            }
+            solve(k , x , arr);
+            size--;
+        }
+    }
+}
